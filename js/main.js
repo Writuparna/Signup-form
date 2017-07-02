@@ -24,26 +24,22 @@ $(document).ready(function(){
 				var userRetrieveData = localStorage.getItem("userDetailStore");
 			*/
 			for(var i=0; i<userAry.length; i++){
-				var userLi = '<li class="list-group-item">'+
-								'<b>Name:</b> '+userAry[i].userName+' '+
-								'<b>Phone no.:</b> '+userAry[i].userPhno+' '+
-								'<b>Email id:</b> '+userAry[i].userEmail+' '+
-								'<button type="button" class="editBtn">Edit</button>'+
-								'<button type="button" class="deleteBtn" id="'+userAry[i].userEmail+'">Delete</button>'
-							+'</li>'
+				var userLi = '<li class="list-group-item userList" id="'+userAry[i].userEmail+'">'+
+								'<span class="userName"><b>Name:</b> '+userAry[i].userName+' '+
+								'</span><span class="userPhno"><b>Phone no.:</b> '+userAry[i].userPhno+' '+
+								'</span><span class="userEmail"><b>Email id:</b> '+userAry[i].userEmail+' '+
+								'</span><span><button type="button" class="btn btn-info editBtn">Edit</button>'+
+								'<button type="button" class="btn btn-danger deleteBtn">Delete</button>'
+							+'</span></li>'
 			}
 			$('#userList').append(userLi);
-
-
-					console.log(JSON.stringify(userAry));
-
+			console.log(JSON.stringify(userAry));
 			$('#username').val("");
 			$('#userphno').val("");
 			$('#useremail').val("");
 			$('#userpass').val("");
 			$('#userconfirmpass').val("");
-			//window.location.href = "userlist.html";
-		}else{
+			}else{
 			alert('please fill all required field');
 		};
 
@@ -51,7 +47,7 @@ $(document).ready(function(){
 	});
 	$('body #userList').on('click','.deleteBtn', function(e){
 		e.stopPropagation();
-		var objId = $(this).attr('id');
+		var objId = $(this).parent().parent().attr('id');
 		for(var j=0; j<userAry.length; j++){
 			var aryObj = userAry[j].userEmail;
 			console.log('userAry Id: '+objId);
@@ -60,8 +56,40 @@ $(document).ready(function(){
 				console.log('userAry index:'+j);
 			}
 		}
-		$(this).parent().remove();
-		console.log('userAry after delete: '+JSON.stringify(userAry));
+		$(this).parent().parent().remove();
+		//console.log('userAry after delete: '+JSON.stringify(userAry));
 	});
+	var objId, editedLi;
+	$('body #userList').on('click','.editBtn', function(e){
+		e.stopPropagation();
+		 $("#myModal").modal("toggle");
+		objId = $(this).parent().parent().attr('id');
+		console.log('userAry before edit: '+JSON.stringify(userAry));
+	});
+	$('#save').click(function(){
+	var editUsername, editUserphno, editUseremail;
+		editUsername = $('#editUsername').val().trim();
+		editUserphno = $('#editUserphno').val().trim();
+		editUseremail = $('#editUseremail').val().trim();
+		for(var j=0; j<userAry.length; j++){
+			var aryObj = userAry[j].userEmail;
+			if(aryObj==objId){
+ 				console.log('userAry index:'+j);
+ 				userAry[j].userName = editUsername;
+ 				userAry[j].userPhno = editUserphno;
+ 				userAry[j].userEmail = editUseremail;
+			}	
+		};
+		$('#'+objId).children('.userName').html('<b>Name: </b>'+editUsername);
+		$('#'+objId).children('.userPhno').html('<b>Phone no: </b> '+editUserphno);
+		$('#'+objId).children('.userEmail').html('<b>Email id: </b>'+editUseremail);
+		$('#editUsername').val("");
+		$('#editUserphno').val("");
+		$('#editUseremail').val("");
 
+
+		console.log('Edit username: '+editUsername+' Edit ph no: '+editUserphno+' Edit user email: '+editUseremail);
+		console.log('userAry Id: '+objId);
+		console.log('userAry after edit: '+JSON.stringify(userAry));
+	});
 });

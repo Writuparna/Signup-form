@@ -1,0 +1,5 @@
+.list-group-item.userList{padding: 0;}
+.userList span{width:28%; display: inline-block; vertical-align: top; border-left:1px solid #ddd; padding: 10px; box-sizing:border-box; min-height: 54px; white-space: nowrap; overflow: hidden; text-overflow:ellipsis; }
+.userList span:last-child{width: 16%; text-align: center;}
+.userList span:last-child button:first-child{margin-right: 5px;}
+.userList span:first-child{border:none;}

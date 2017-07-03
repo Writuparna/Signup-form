@@ -3,6 +3,8 @@ $(document).ready(function(){
 
 	var userAry = [];
 
+	$('#getResult').html(sessionStorage.getItem('userDataStore'));
+
 	
 	$('#signup').click(function(){
 		var username = $('#username').val().trim();
@@ -19,8 +21,8 @@ $(document).ready(function(){
 				userConfirmpass : userconfirmpass,
 			}
 			userAry.push(newUser);
-			
-			localStorage.setItem('userDataStore',JSON.stringify(userAry));
+			console.log('->'+JSON.stringify(userAry));
+			sessionStorage.setItem('userDataStore',JSON.stringify(userAry));
 			var userAryStore = localStorage.getItem('userDataStore');
 			userAryStore = JSON.parse(userAryStore);
 			console.dir('user array storage'+ JSON.stringify(userAryStore));

@@ -19,21 +19,23 @@ $(document).ready(function(){
 				userConfirmpass : userconfirmpass,
 			}
 			userAry.push(newUser);
-			/*if(localStorage){};
-				localStorage.setItem('userDetailStore',JSON.stringify(userAry));
-				var userRetrieveData = localStorage.getItem("userDetailStore");
-			*/
+			
+			localStorage.setItem('userDataStore',JSON.stringify(userAry));
+			var userAryStore = localStorage.getItem('userDataStore');
+			userAryStore = JSON.parse(userAryStore);
+			console.dir('user array storage'+ JSON.stringify(userAryStore));
+
 			for(var i=0; i<userAry.length; i++){
-				var userLi = '<li class="list-group-item userList" id="'+userAry[i].userEmail+'">'+
-								'<span class="userName"><b>Name:</b> '+userAry[i].userName+' '+
-								'</span><span class="userPhno"><b>Phone no.:</b> '+userAry[i].userPhno+' '+
-								'</span><span class="userEmail"><b>Email id:</b> '+userAry[i].userEmail+' '+
+				var userLi = '<li class="list-group-item userList" id="'+userAryStore[i].userEmail+'">'+
+								'<span class="userName"><b>Name:</b> '+userAryStore[i].userName+' '+
+								'</span><span class="userPhno"><b>Phone no.:</b> '+userAryStore[i].userPhno+' '+
+								'</span><span class="userEmail"><b>Email id:</b> '+userAryStore[i].userEmail+' '+
 								'</span><span><button type="button" class="btn btn-info editBtn">Edit</button>'+
 								'<button type="button" class="btn btn-danger deleteBtn">Delete</button>'
 							+'</span></li>'
 			}
 			$('#userList').append(userLi);
-			console.log(JSON.stringify(userAry));
+			//console.log(JSON.stringify(userAry));
 			$('#username').val("");
 			$('#userphno').val("");
 			$('#useremail').val("");

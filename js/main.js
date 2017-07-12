@@ -3,7 +3,7 @@ $(document).ready(function(){
 
 	var userAry = [];
 
-	
+	 $('#getResult').html(sessionStorage.getItem('userDataStore'));
 	$('#signup').click(function(){
 		var username = $('#username').val().trim();
 		var userphno = $('#userphno').val().trim();
@@ -34,10 +34,10 @@ $(document).ready(function(){
 				}
 				userAry.push(newUser);
 				
-				localStorage.setItem('userDataStore',JSON.stringify(userAry));
-				var userAryStore = localStorage.getItem('userDataStore');
+				sessionStorage.setItem('userDataStore',sessionStorage.getItem('userDataStore')+JSON.stringify(userAry));
+				/*var userAryStore = localStorage.getItem('userDataStore');
 				userAryStore = JSON.parse(userAryStore);
-				console.dir('user array storage'+ JSON.stringify(userAryStore));
+				console.dir('user array storage'+ JSON.stringify(userAryStore));*/
 
 				for(var i=0; i<userAry.length; i++){
 					var userLi = '<li class="list-group-item userList" id="'+userAryStore[i].userEmail+'">'+

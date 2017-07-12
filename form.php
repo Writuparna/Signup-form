@@ -2,11 +2,11 @@
 
 <?php
 
-$name = $POST['username'];
-$phone = $POST['userphno'];
-$email = $POST['useremail'];
-$password = $POST['userpass'];
-$confirmpassword = $POST['userconfirmpass'];
+$name = $_POST['username'];
+$phone = $_POST['userphno'];
+$email = $_POST['useremail'];
+$password = $_POST['userpass'];
+$confirmpassword = $_POST['userconfirmpass'];
 
 echo $name;
 
